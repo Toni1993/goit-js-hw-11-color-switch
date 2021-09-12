@@ -8,19 +8,20 @@ const startBtn = document.querySelector('[data-action="start"]')
 
 const stopBtn = document.querySelector('[data-action="stop"]')
 
-console.log(stopBtn)
-
 let timeoutId = null
 
 startBtn.addEventListener('click', onStartClick)
 stopBtn.addEventListener('click', onStopClick)
+const bodyColor = () => {
+  document.body.style.backgroundColor = colors[randomIntegerFromInterval(0, colors.length - 1)]
+}
 
 function onStartClick() {
-  timeoutId = setInterval(() => {
-    document.body.style.backgroundColor = colors[randomIntegerFromInterval(0, 6)]
-  }, 1000)
+  timeoutId = setInterval(bodyColor, 1000)
+  startBtn.disabled = true
 }
 
 function onStopClick() {
   clearInterval(timeoutId)
+  startBtn.disabled = false
 }
